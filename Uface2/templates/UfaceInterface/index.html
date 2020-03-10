@@ -1,0 +1,111 @@
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+      <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    {% load static %}
+    <script src="{%static 'login.js'%}"></script>
+      
+  </head>
+  <body>
+ <div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+		<div class="col-md-12 text-center mb-5">
+            <img src="ufaceLogo.png">
+			</div>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <!-- form card login -->
+                    <div class="card rounded-0" id="login-form">
+                        <div class="card-header">
+                            <h3 class="mb-0">User Login</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                                <div class="form-group">
+                                    <label for="uname1">Username</label>
+                                    <input type="text" class="form-control form-control-lg rounded-0" name="uname1" id="uname1" required="">
+     
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control form-control-lg rounded-0" name="pwd1" id="pwd1" required="">
+                        
+                                </div>
+                                <div>
+									<label class="custom-control custom-checkbox">
+                                     <a href="https://pwd.ntu.edu.sg/" class="forgot-form-link">Forgot Password</a>
+                                    </label>
+                                </div>
+                                <button type="button" onclick = "check(this.form)" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
+                                
+                                
+                                <script language="javascript">
+                                    function check(form)/*function to check userid & password*/
+                                    {
+                                     /*the following code checkes whether the entered userid and password are matching*/
+                                     if(form.uname1.value == "admin" && form.pwd1.value == "password")
+                                      {
+                                        window.location.replace("{% url 'UfaceInterface:SelectModule' %}")/*opens the target page while Id & password matches*/
+                                      }
+                                     else
+                                     {
+                                       alert("Error Password or Username")/*displays error message*/
+                                      }
+                                    }
+                                </script>
+                                
+                                
+                                
+                                <!--
+                                <script>document.getElementById("btnLogin").addEventListener("click", function() {
+                                        
+                                        if(document.getElementsByName('#uname1').value == "admin"){
+                                            if( document.getElementsByName("#pwd1") == "password"){
+                                                alert("welcome");
+                                                console.log(document.getElementsByName("#uname1").value);
+                                            }else if(document.getElementsByName("pwd1") != "password"){
+                                                alert("password is wrong");
+                                            }
+                                        }else if(document.getElementsByName("#uname1") != "admin"){
+                                            alert("username is wrong");
+                                        }else{
+                                            alert("something is wrong");    
+                                        }
+                                    });
+                                </script>     -->
+                                <!--<button onclick ="login()" type="submit" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button> -->
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /form card login end-->
+					
+					    <!-- form card register -->
+                   </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
