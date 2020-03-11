@@ -17,6 +17,9 @@ def ViewNameList(request):
 def ViewReport(request):
     return render(request, 'pages/ViewReport.html')
 
+def TakeAttendance(request):
+    return render(request, 'pages/TakeAttendance.html')
+
 #def ViewNameList(request):
 #    if request.method =='POST':
 #        form = 
