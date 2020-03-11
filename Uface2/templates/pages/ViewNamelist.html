@@ -27,7 +27,7 @@
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
               <h5 class="my-0 mr-md-auto font-weight-normal">UserName</h5>
             <!--href to be changed to homepage-->
-              <a class="btn btn-secondary" href="#">Log Out</a>
+              <a class="btn btn-secondary" href="{% url 'logout' %}">Log Out</a>
             </div>
           </div>
 
@@ -91,7 +91,7 @@
 
           <div class="container">
             
-            <a class="btn btn-secondary" href="SelectModule.html">Back</a>
+            <a class="btn btn-secondary" href="{% url 'UfaceInterface:select-module' %}">Back</a>
 
           </div>
           

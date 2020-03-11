@@ -5,6 +5,6 @@ app_name='UfaceInterface'
 urlpatterns = [
 #    path('', views.index, name ='index'),
     path('selectmodule/', views.SelectModule, name='select-module'),
-    path('viewnamelist/', views.ViewNameList, name='view-name-list'),
-    path('viewreport/', views.ViewReport, name='view-report'),
+    path('selectmodule/viewnamelist/', views.ViewNameList, name='view-name-list'),
+    path('selectmodule/viewreport/', views.ViewReport, name='view-report'),
 ]

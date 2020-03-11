@@ -32,10 +32,16 @@
       <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal">UserName</h5>
       <!--href to be changed to homepage-->
-        <a class="btn btn-secondary" href="#">Log Out</a>
+        <a class="btn btn-secondary" href="{% url 'logout' %}">Log Out</a>
       </div>
     </div>
-       
+      
+    
+
+
+
+
+
     <div class="container">
 
      
@@ -95,7 +101,7 @@
    <div class="container">
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
       <div class="btn-group mr-2" role="group" aria-label="First group">
-        <a class="btn btn-secondary" href="ViewNamelist.html">View Name List</a>
+        <a class="btn btn-secondary" href="{% url 'UfaceInterface:view-name-list' %}">View Name List</a>
       
       </div>
 
@@ -105,7 +111,7 @@
         
       </div>
       <div class="btn-group" role="group" aria-label="Third group">
-        <a class="btn btn-secondary" href="ViewReport.html">View Report</a>
+        <a class="btn btn-secondary" href="{% url 'UfaceInterface:view-report' %}">View Report</a>
       </div>
     </div>
    </div>
