@@ -1,0 +1,59 @@
+       <div class="container" >     
+        <div id="my_camera" align = "left"></div>
+      
+      	<!-- First, include the Webcam.js JavaScript Library -->
+    {% load staticfiles %}
+    <script src="{% static 'webcam.min.js' %}"></script>
+
+	<!-- Configure a few settings and attach camera -->
+	<script language="JavaScript">
+		Webcam.set({
+			width: 1100,
+			height: 400,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+            
+		});
+		Webcam.attach( '#my_camera' );
+	</script>
+            <style>
+          div.container{
+              width: 500px
+              margin: auto;
+              align-content: right;
+          }
+      
+      </style>
+    <form>
+		<input type=button value="Take Snapshot" onClick="take_snapshot()">
+	</form>
+	
+	<!-- Code to handle taking the snapshot and displaying it locally -->
+	<script language="JavaScript">
+		function take_snapshot() {
+			// take snapshot and get image data
+			Webcam.snap( function(data_uri) {
+				// display results in page
+				document.getElementById('results').innerHTML = 
+					'<h2>Here is your image:</h2>' + 
+					'<img src="'+data_uri+'"/>';
+			} );
+		}
+	</script>
+</div>
+           
+        <!-- student name list
+              <ul class="list-group align=center" id="attendance">
+          <li class="list-group-item active">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Morbi leo risus</li>
+          <li class="list-group-item">Porta ac consectetur ac</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+           
+        </div>
+
+      
+  
+    
+      -->
