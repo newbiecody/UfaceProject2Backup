@@ -3,7 +3,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    {% load static %}
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -16,16 +16,16 @@
                
             
               
-            <img class=" pull-left header-logo" src="NTU Logo.png" alt="NTU Logo">
+            <img class=" pull-left header-logo" src="{% static 'NTU Logo.png' %}" alt="NTU Logo">
          
          
-            <img class="pull-right header-logo" style="padding-left: 47.5rem" src="UFace Logo.png" alt="UFace Logo">
+            <img class="pull-right header-logo" style="padding-left: 47.5rem" src="{% static 'UFace Logo.png' %}" alt="UFace Logo">
            
           </div>
 
           <div class="container">
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-              <h5 class="my-0 mr-md-auto font-weight-normal">UserName</h5>
+              <h5 class="my-0 mr-md-auto font-weight-normal">{{user.get_username}}</h5>
             <!--href to be changed to homepage-->
               <a class="btn btn-secondary" href="{% url 'logout' %}">Log Out</a>
             </div>

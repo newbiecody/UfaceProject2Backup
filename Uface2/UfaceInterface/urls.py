@@ -9,4 +9,5 @@ urlpatterns = [
     path('selectmodule/viewreport/', views.ViewReport, name='view-report'),
     path('selectmodule/registerface/', views.RegisterFace, name='register-face'),
     path('selectmodule/takeattendance/', views.TakeAttendance, name='take-attendance'),
+    #path('selectmodule/registerface/error/', views.RegisterFaceError, name='register-error'),
 ]

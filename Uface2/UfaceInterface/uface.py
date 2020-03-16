@@ -47,9 +47,11 @@ def registerFace():
 
             print("Face information of {} has been recorded into database!".format(face_name))
             cap.release()
+            cv2.destroyAllWindows()
             return 1
         elif key & 0xFF == ord('q'):
             cap.release()
+            cv2.destroyAllWindows()
             return 0
         
     #cap.release()

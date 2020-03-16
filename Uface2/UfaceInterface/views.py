@@ -26,10 +26,15 @@ def RegisterFace(request):
     if(uface.registerFace()):
         return render(request, 'pages/RegisterFace.html')
     else:
-        return render(request, 'pages/errorRegister.html')
+        return render(request, 'pages/error.html')
 
 def TakeAttendance(request):
+    uface.registerFace()
     return render(request, 'pages/TakeAttendance.html')
+
+#def RegisterFaceError(request):
+#    return render(request, 'pages/errorRegister.html')
+
 
 #testing opencv
 
