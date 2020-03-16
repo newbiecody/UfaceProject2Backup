@@ -239,6 +239,9 @@ class Student:
                 "facial_info": fb_facial_info, "attendance_records": self.attendance_records,
                 "email": self.email}
 
+    def set_email(self, email):
+        self.email = email
+
 
 def test():
     set_course("cz3002", {"empty": None})
@@ -286,4 +289,19 @@ def test():
     print(get_course_dict("cz3002") is None)
 
 
+def add_dummy_data():
+    create_course("cz3002", "ASE")
+
+    create_module("cz3002", "sp1")
+
+    for x in range(20):
+        create_student("cz3002", "sp1", "matric_num_" + str(x), "student_name_" + str(x))
+
+    create_module("cz3002", "sp2")
+
+    for x in range(20):
+        create_student("cz3002", "sp2", "matric_num_" + str(x), "student_name_" + str(x))
+
+
 # test()
+# add_dummy_data()
