@@ -53,6 +53,14 @@ def get_course_dict(course_id):
     return get_document(COLLECTION_COURSES, course_id)
 
 
+def get_all_course_dict():
+    doc_ref_list = db.collection(COLLECTION_COURSES).list_documents()
+    doc_dict_list = []
+    for doc_ref in doc_ref_list:
+        doc_dict_list.append(doc_ref.get().to_dict())
+    return doc_dict_list
+
+
 def create_module(course_id, module_index):
     course_dict = get_course_dict(course_id)
     if course_dict is not None:
@@ -164,7 +172,7 @@ def set_attendance_record(course_id, module_index, matric_number, time, is_prese
 
 def get_attendance_record(course_id, module_index, matric_number, time):
     student_obj = get_student_obj(course_id, module_index, matric_number)
-    if student_obj.attendance_records[time] is None:
+    if time not in student_obj.attendance_records.keys():
         return False
     else:
         return student_obj.attendance_records[time]
@@ -271,6 +279,8 @@ def test():
     create_student("cz3002", "sp1", "1", "Jason2")
     print(get_all_student_obj("cz3002", "sp1")[0].name == "Jason"
           and get_all_student_obj("cz3002", "sp1")[1].name == "Jason2")
+
+    print(get_all_course_dict())
 
     set_facial_info("cz3002", "sp1", "0",
                     [[0, 0, 1, 1],
