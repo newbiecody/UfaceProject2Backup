@@ -1,158 +1,222 @@
+<!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+	<!-- Add tracking.js for uisng webcam and tracking face  -->
+	{% load static %}
+	<script src="{% static 'tracking-min.js' %}"></script>
+	<script src="{% static 'face-min.js' %}"></script>
 
-    <title>View Name List</title>
-    {% load static %}
-  </head>
-  <body>
 
-        <div class="header">
-          <div class="container">
-               
-            
-              
-            <img class=" pull-left header-logo" src="{% static 'NTU Logo.png' %} " alt="NTU Logo">
-         
-         
-            <img class="pull-right header-logo" style="padding-left: 47.5rem" src="{% static 'UFace Logo.png' %}" alt="UFace Logo">
-           
-          </div>
+	<title>Take attendance</title>
+	<style type="text/css">
+		* {
+  			box-sizing: border-box;
+		}
+		
+		html {
+  			font-family: "Lucida Sans", sans-serif;
+		}
+		.header {
+  			background-color: #495B67;
+			color: #ffffff;
+			text-align: center;
+			padding: 5px;
+			
+		}
+		div.left{
+			float: left;
+			width: 50%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 20px;
+			
+		}
+		div.right{
+			float: left;
+			width: 50%;
+			margin-top: 10px;
+			margin-left: auto ;
+			margin-right: auto;
+			padding-left: 2%;
+			padding-right: 2%;
+		}
 
-          <div class="container">
-            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-              <h5 class="my-0 mr-md-auto font-weight-normal">{{user.get_username}}</h5>
-            <!--href to be changed to homepage-->
-              <a class="btn btn-secondary" href="{% url 'logout' %}">Log Out</a>
-            </div>
-          </div>
+		video,canvas{position: absolute;}
 
-          <div class="container">
-            <table class="table table-bordered">
-             
-              <tr>
-                <th scope="row">Course</th>
-                <td>--course id and name--</td>
-                <th scope="row">Index</th>
-                <td>--index no--</td>
-              </tr>
+		.button {
+			background-color: #CDAA6E;
+  			border: none;
+  			color: white;
+  			padding: 15px 32px;
+  			text-align: center;
+  			text-decoration: none;
+  			display: block;
+  			font-size: 16px;
+			border-radius: 10px;
+			margin-top: 5px;
+			margin-bottom: 20px;
+		}
+		#takeAttendance{
+			background-color: #CDAA6E;
+		}
+		#endSession{
+			background-color: #796E45;
+		}
 
-        
+		table{
+			font-family: arial;
+			border-collapse: collapse;
+			table-layout:auto;
+			width: 100%;
+		}
+		td, th {
+  			border: 1px solid #dddddd;
+  			text-align: left;
+  			padding: 10px;
+		}
+		table#t01 th{
+			background-color: #4B6753;
+			color:aliceblue;
+			padding: 10px;
+			text-align: center;
+		}
+		table#t01 td {
+  			background-color: rgb(233, 229, 211);
+		}
+		p{
+			line-height: 20px;
+			color:#495B67;
+			font-size: medium;
+			;
+		}
+    </style>
 
-            </table>
-            
-            <h5>Present (Attendance Registered)</h5>
+</head>
 
-          </div>
-          
-          
-          <div class="container">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Index No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Matriculation No.</th>
-                  <th scope="col">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Student1</td>
-                  <td>UXXX1</td>
-                  
-                  <td>UXXX1@e.ntu.edu.sg</td>
-        
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Student2</td>
-                  <td>UXXX2</td>
-                  
-                  <td>UXXX2@e.ntu.edu.sg</td>
-              
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Student3</td>
-                  <td>UXXX3</td>
-                  
-                  <td>UXXX3@e.ntu.edu.sg</td>
-            
-                </tr>
-              </tbody>
-            </table>
-          </div>
-            
-        <div class="container">
-            
-        <h5>Absent (Attendance Not Registered)</h5>    
-        </div>
-            
-          <div class="container">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Index No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Matriculation No.</th>
-                  <th scope="col">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>Student4</td>
-                  <td>UXXX4</td>
-                  
-                  <td>UXXX4@e.ntu.edu.sg</td>
-        
-                </tr>
-                <tr>
-                  <th scope="row">5</th>
-                  <td>Student5</td>
-                  <td>UXXX5</td>
-                  
-                  <td>UXXX5@e.ntu.edu.sg</td>
-              
-                </tr>
-                <tr>
-                  <th scope="row">6</th>
-                  <td>Student6</td>
-                  <td>UXXX6</td>
-                  
-                  <td>UXXX6@e.ntu.edu.sg</td>
-            
-                </tr>
-              </tbody>
-            </table>
-          </div>
+<body>
+	<div class= "header">
+		<h2>Attendance Taking for CZ3002</h2>
+	</div>
 
-          <div class="container">
-            
-            <a class="btn btn-secondary" href="{% url 'UfaceInterface:select-module' %}">Back</a>
+	<div class="left">
+		<video id="video" width="640" height="480" preload autoplay loop muted></video>
+		<canvas id="canvas" width="640" height="480"></canvas>
+		
+	</div>	
+	<div class="right">
+		<!-- display success/failure message to student -->
+		<p id="message">Status: </p>
+		
+		<div align="left" style="float: left">
+			<input type=button id="takeAttendance" class="button" value="Sign Attendance">
+		</div>
+		<div align="right">
+			<input type=button id="endSession" class="button" value="End Session">
+		</div>
 
-          </div>
-          
-      </div>
+		<div class="list">
+		<table id="t01">
+			<thead>
+			<tr>
+			  <th scope="col">Matric Number</th>
+			  <th scope="col">Name</th>
+			  <th scope="col">Attendance</th>
+			</tr>
+		  	</thead>
+		</table>
+		</div>
+	</div>
 
-      
+	
+	
+	<script language="JavaScript">
 
-    <!-- Optional JavaScript -->
-    <script>
-      function myFunction() {
-    window.print();
-}
-    </script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+		window.onload = function() {
+      		var video = document.getElementById('video');
+      		var canvas = document.getElementById('canvas');
+      		var context = canvas.getContext('2d');
+
+      		var tracker = new tracking.ObjectTracker('face');
+      		tracker.setInitialScale(4);
+      		tracker.setStepSize(2);
+      		tracker.setEdgesDensity(0.1);
+
+      		tracking.track('#video', tracker, { camera: true });
+
+      		tracker.on('track', function(event) {
+    	 		context.clearRect(0, 0, canvas.width, canvas.height);
+				//show face bbox using tracking.js 
+				//comment this part if you want to draw bbox based on backend face_recognition detection results
+        		event.data.forEach(function(rect) {
+					context.lineWidth = 4;
+          			context.strokeStyle = "#F7D94C";
+          			context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+        		});
+      		});
+   		};
+
+        $(document).ready(function() {
+			$("#takeAttendance").click(function(){
+				var video = document.getElementById('video');
+				var canvas = document.getElementById('canvas');
+				var context = canvas.getContext('2d');
+				context.drawImage(video,0,0,canvas.width,canvas.height);
+				var faceImg = canvas.toDataURL("image/png");
+				var table = document.getElementById('t01');
+				var message = document.getElementById("message");
+				$.ajax({
+					type:"POST",
+					url:"{% url 'UfaceInterface:check-face' %}",
+					beforeSend:function (xhr,setting) {
+                		xhr.setRequestHeader("X-CSRFToken","{{ csrf_token }}");
+            		},
+					dataType:"json",
+					data:{
+						"webcam":faceImg
+					},
+					success:function(backInfo){
+						console.log(backInfo)
+						
+						for (student of backInfo){
+							var name = student[0];
+							var matric = student[1];
+							var signed = student[6];
+							var top, right, bottom, left = backInfo.slice(2,6);
+							if (name == 'Unknown'){
+								//show message "Coundn't find matched face"
+								message.innerHTML = "Status:  Sorry, we couldn't match you with any student :(";
+							}
+							else{
+								if (signed === true){
+									//the student has already signed attendance.
+									//show message "You are already signed in!"
+									message.innerHTML = "Status:  Hi, "+name +"! You have already signed in!";
+								}
+								else{
+									//update the table element.
+									var row = table.insertRow(1);
+									var cell1 = row.insertCell(0);
+									var cell2 = row.insertCell(1);
+									var cell3 = row.insertCell(2);
+									cell1.innerHTML = matric;
+									cell2.innerHTML = name;
+									cell3.innerHTML = "Yes";
+									//show message "Signed in successfully!  Welcome, XXX!"
+									message.innerHTML = "Status:   Signed in successfully!  Welcome, " + name + "!";
+								}
+							}
+						}
+						
+					}
+				})
+			})	
+		})
+	
+		
+	</script>
+</body>
+
 </html>

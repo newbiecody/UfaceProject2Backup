@@ -6,6 +6,7 @@
     {% load static %}
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     <title>Course Selection</title>
 
@@ -47,10 +48,17 @@
      
         <label>Course</label>
         <select class="form-control course selectFilter" data-target="index">
-           <option value="-1">--Select Course--</option>
+          
+          <!--
+          {% for retrieved in zip_courses_indexes %}
+              <option value="{{retrieved.0}}">{{retrieved.0}}</option>
+          {% endfor %}
+          -->
+          
+          <option value="-1">--Select Course--</option>
 
            <option data-ref="3002">CZ3002</option>
-           <option data-ref="3003">CZ3003</option>
+           <option data-ref="3003">CZ3003</option>  
           
         </select>
 
@@ -60,11 +68,11 @@
         <select class="form-control index selectFilter" data-target="session">
           <option value="-1">--Select Index--</option>
 
-          <option data-ref="215" data-belong="3002">10215</option>
-          <option data-ref="216" data-belong="3002">10216</option>
+          <option data-ref="215" data-belong="3002">sp1</option>
+          <option data-ref="216" data-belong="3002">sp2</option><!--original values are 10215,10216,10224,10225-->
 
-          <option data-ref="224" data-belong="3003">10224</option>
-          <option data-ref="225" data-belong="3003">10225</option>
+        <!--  <option data-ref="224" data-belong="3003">10224</option>
+          <option data-ref="225" data-belong="3003">10225</option>  -->
       
           
         </select>

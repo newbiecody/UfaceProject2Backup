@@ -15,6 +15,8 @@ face-recognition = "*"
 gzip = "*"
 firebase-admin = "*"
 google = "*"
+tabulate = "*"
+jquery = "*"
 
 [requires]
 python_version = "3.7"

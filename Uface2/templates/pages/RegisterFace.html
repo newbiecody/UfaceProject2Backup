@@ -1,8 +1,210 @@
-<html>
-    <head>
-        <meta http-equiv="refresh" content="5; url= {% url 'UfaceInterface:select-module' %}" />
-    </head>
-    <body>
-        <h1>Your facial data has been successfully registered into the system. Redirecting you to the main page in 5 seconds...</h1>
-    </body>
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+	<!-- Add tracking.js for uisng webcam and tracking face  -->
+	{% load static %}
+	<script src="{% static 'tracking-min.js' %}"></script>
+	<script src="{% static 'face-min.js' %}"></script>
+
+
+	<title>Register Face</title>
+	<style type="text/css">
+		* {
+  			box-sizing: border-box;
+		}
+		
+		html {
+  			font-family: "Lucida Sans", sans-serif;
+		}
+		.header {
+  			background-color: #4B6753;
+			color: #ffffff;
+			text-align:start;
+			padding: 8px;
+	
+		}
+		div.left{
+			float: left;
+			width: 50%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 20px;
+			
+		}
+		div.right{
+			float: left;
+			width: 50%;
+			margin-top: 10px;
+			margin-left: auto ;
+			margin-right: auto;
+			padding-left: 2%;
+			padding-right: 2%;
+		}
+
+		video,canvas{position: absolute;}
+
+		.registerButton {
+    		background-color: rgb(47, 70, 87);
+    		border: none;
+    		color: white;
+    		padding: 15px 15px;
+    		text-align: center;
+    		text-decoration: none;
+    		display: block;
+    		font-size: 16px;
+    		border-radius: 10px;
+    		margin: 5px;
+		}
+
+		table{
+			font-family: arial;
+			border-collapse: collapse;
+			table-layout:auto;
+			width: 100%;
+		}
+		td, th {
+  			border: 1px solid #dddddd;
+  			text-align: left;
+  			padding: 10px;
+		}
+		table#t01 th{
+			background-color: #495B67;
+			color:aliceblue;
+			padding: 10px;
+			text-align: center;
+		}
+		table#t01 td {
+  			background-color: rgb(233, 229, 211);
+		}
+		p{
+			line-height: 20px;
+			color:#495B67;
+			font-size: medium;
+			;
+		}
+    </style>
+
+</head>
+
+<body>
+	<div class= "header">
+		<h2>Register Your Face Here</h2>
+	</div>
+
+	<div class="left">
+		<video id="video" width="640" height="480" preload autoplay loop muted></video>
+		<canvas id="canvas" width="640" height="480"></canvas>
+		
+	</div>	
+	
+	<div class="right">
+		<!-- display success/failure message to student -->
+		<p id="message">Status: </p>
+
+		<div class="list">
+		<table id="t01">
+			<thead>
+			<tr>
+			  <th scope="col">Matric Number</th>
+			  <th scope="col">Name</th>
+			  <th scope="col">Registered</th>
+			  <th scope="col">Action</th>
+			</tr>
+			</thead>
+		</table>
+		</div>
+	</div>
+
+	
+	<script language="JavaScript">
+
+		window.onload = function() {
+      		var video = document.getElementById('video');
+      		var canvas = document.getElementById('canvas');
+      		var context = canvas.getContext('2d');
+
+      		var tracker = new tracking.ObjectTracker('face');
+      		tracker.setInitialScale(4);
+      		tracker.setStepSize(2);
+      		tracker.setEdgesDensity(0.1);
+
+      		tracking.track('#video', tracker, { camera: true });
+
+      		tracker.on('track', function(event) {
+    	 		context.clearRect(0, 0, canvas.width, canvas.height);
+				//show face bbox using tracking.js 
+				//comment this part if you want to draw bbox based on backend face_recognition detection results
+        		event.data.forEach(function(rect) {
+					context.lineWidth = 4;
+          			context.strokeStyle = "#F7D94C";
+          			context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+        		});
+			});
+			//get the full list of students 
+			var List = {{ list|safe }};
+			var table = document.getElementById('t01');
+
+			console.log(List)
+			for (student of List){
+				var row = table.insertRow(1);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				var cell3 = row.insertCell(2);
+				var cell4 = row.insertCell(3);
+				cell1.innerHTML = student[0]; //matric num
+				cell2.innerHTML = student[1]; //name
+				cell3.innerHTML = student[2]; //face registered or not
+				cell3.id = student[0];
+				//registered button
+				cell4.innerHTML = "<input type=button class=\"registerButton\" value=\"Register\" onclick=\"register(\'"+ student[0] +"\')\">";
+
+			}
+			  
+   		};
+
+    	function register(matric){
+			var video = document.getElementById('video');
+      		var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+			context.drawImage(video,0,0,canvas.width,canvas.height);
+			var faceImg = canvas.toDataURL("image/png");
+			$.ajax({
+				type:"POST",
+				url:"{% url 'UfaceInterface:face-registration' %}",
+					beforeSend:function (xhr,setting) {
+            		xhr.setRequestHeader("X-CSRFToken","{{ csrf_token }}");
+            		},
+					dataType:"json",
+					data:{
+						"matric": matric,
+						"webcam":faceImg
+					},
+					success:function(backInfo){
+						console.log(backInfo)
+						if (backInfo["success"] === 0){
+							message.innerHTML = "Status:  FAILED. More Than One Face Detected!";
+
+						}
+						else if (backInfo["success"] === 1){
+							message.innerHTML = "Status:  FAILED. No Face Is Detected! ";
+						}
+						else if(backInfo["success"] === 2){
+							message.innerHTML = "Status:  SUCCESSFUL! ";
+							var registered = document.getElementById(matric);
+							registered.innerHTML = "Yes";
+						}
+						
+						
+					}
+				})
+
+
+	}	
+		
+	</script>
+	</body>
+
 </html>

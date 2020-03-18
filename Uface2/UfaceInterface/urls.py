@@ -10,4 +10,7 @@ urlpatterns = [
     path('selectmodule/registerface/', views.RegisterFace, name='register-face'),
     path('selectmodule/takeattendance/', views.TakeAttendance, name='take-attendance'),
     #path('selectmodule/registerface/error/', views.RegisterFaceError, name='register-error'),
+    path('selectmodule/takeattendance/checkface/', views.checkFace, name='check-face'),
+    path('selectmodule/registerface/info', views.faceRegistration, name='face-registration'),
+
 ]

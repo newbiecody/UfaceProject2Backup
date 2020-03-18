@@ -36,9 +36,9 @@
              
               <tr>
                 <th scope="row">Course</th>
-                <td>--course id and name--</td>
+                <td>cz3002</td>
                 <th scope="row">Index</th>
-                <td>--index no--</td>
+                <td>sp1</td>
               </tr>
 
         
@@ -52,6 +52,7 @@
           
           <div class="container">
             <table class="table table-striped">
+              
               <thead>
                 <tr>
                   <th scope="col">Index No.</th>
@@ -60,32 +61,18 @@
                   <th scope="col">Email</th>
                 </tr>
               </thead>
+
               <tbody>
+                {% for row in zipped_list %}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Student1</td>
-                  <td>UXXX1</td>
-                  
-                  <td>UXXX1@e.ntu.edu.sg</td>
-        
+                  {% for column in row %}
+                    <td>{{column}}</td>
+                  {% endfor %}
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Student2</td>
-                  <td>UXXX2</td>
-                  
-                  <td>UXXX2@e.ntu.edu.sg</td>
-              
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Student3</td>
-                  <td>UXXX3</td>
-                  
-                  <td>UXXX3@e.ntu.edu.sg</td>
-            
-                </tr>
+                {% endfor %}
+
               </tbody>
+
             </table>
           </div>
 
