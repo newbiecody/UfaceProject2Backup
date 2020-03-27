@@ -34,8 +34,9 @@ def SelectModule(request):
     print(indexes)
 
     zip_courses_indexes = zip(courses,indexes)
+    context = {'zip_courses_indexes':zip_courses_indexes}
 
-    return render(request, 'pages/SelectModule.html', {'zip_courses_indexes':zip_courses_indexes})
+    return render(request, 'pages/SelectModule.html', context)
 
 def ViewNameList(request):
     data = fb.get_course_dict("cz3002").get("modules","")

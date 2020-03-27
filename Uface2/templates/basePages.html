@@ -31,77 +31,21 @@
     <div class="container">
       
       <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Home</h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal">{{user.get_username}}</h5>
       <!--href to be changed to homepage-->
         <a class="btn btn-secondary" href="{% url 'logout' %}">Log Out</a>
       </div>
     </div>
       
-    
+    <div class="content container">
+      {% block content %}
+
+      {% endblock %}
+    </div>
 
 
-
-
-
-    <div class="container">
-
-     
-        <label>Course</label>
-        <select class="form-control course selectFilter" data-target="index">
-          <option value="-1">--Select Course--</option>
-          {% for retrieved in zip_courses_indexes %}
-              <option data-ref="{{retrieved.0}}">{{retrieved.0}}</option>
-          {% endfor %}
-          
-          
-
-<!--
-           <option data-ref="3002">CZ3002</option>
-           <option data-ref="3003">CZ3003</option>  
--->
-        </select>
-
-        <label>Index</label>
-        <select class="form-control index selectFilter" data-target="session">
-          <option value="-1">--Select Index--</option>
-          {% for gotten in zip_courses_indexes %}
-              <option data-ref="{{gotten.1}}">{{gotten.1}}</option>
-          {% endfor %}
-
-        <!--  <option data-ref="224" data-belong="3003">10224</option>
-          <option data-ref="225" data-belong="3003">10225</option>  -->
-      
-          
-        </select>
-     
-
-      
-        <label>Session</label>
-        <select class="form-control session selectFilter">
-          <option value="-1">--Select Session--</option>
-
-          <option data-belong="215">Lab 1</option>
-          <option data-belong="215">Lab 2</option>
-          <option data-belong="215">Lab 3</option>
-<!--
-          <option data-belong="216">Lab 1</option>
-          <option data-belong="216">Lab 2</option>
-          <option data-belong="216">Lab 3</option>
-        
-          <option data-belong="224">Lab 1</option>
-          <option data-belong="224">Lab 2</option>
-          <option data-belong="224">Lab 3</option>
-
-          <option data-belong="225">Lab 1</option>
-          <option data-belong="225">Lab 2</option>
-          <option data-belong="225">Lab 3</option>
--->
-        </select>
-      
-   </div>
-
-   <br />
-   <br />
+   <br>
+   <br>
 
    <div class="container">
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -133,4 +77,5 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="selectFilter.min.js"></script>
+    <br>
   </body>

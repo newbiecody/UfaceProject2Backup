@@ -8,6 +8,7 @@
 	{% load static %}
 	<script src="{% static 'tracking-min.js' %}"></script>
 	<script src="{% static 'face-min.js' %}"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
 	<title>Register Face</title>
@@ -16,26 +17,18 @@
   			box-sizing: border-box;
 		}
 		
-		html {
-  			font-family: "Lucida Sans", sans-serif;
-		}
-		.header {
-  			background-color: #4B6753;
-			color: #ffffff;
-			text-align:start;
-			padding: 8px;
-	
-		}
+
+
 		div.left{
 			float: left;
 			width: 50%;
-			margin-left: auto;
+			margin-left: 15%;
 			margin-right: auto;
 			margin-top: 20px;
 			
 		}
 		div.right{
-			float: left;
+			float: right;
 			width: 50%;
 			margin-top: 10px;
 			margin-left: auto ;
@@ -63,7 +56,7 @@
 			font-family: arial;
 			border-collapse: collapse;
 			table-layout:auto;
-			width: 100%;
+			width: 60%;
 		}
 		td, th {
   			border: 1px solid #dddddd;
@@ -90,10 +83,31 @@
 </head>
 
 <body>
-	<div class= "header">
-		<h2>Register Your Face Here</h2>
-	</div>
 
+
+<div class="header">
+	<div class="container">
+		 
+	  
+		
+		<img class=" pull-left header-logo" src="{% static 'NTU Logo.png' %}" alt="NTU Logo">
+	 
+	 
+		<img class="pull-right header-logo" style="padding-left: 47.5rem" src="{% static 'UFace Logo.png' %}" alt="UFace Logo">
+	 
+	</div>
+	
+</div>
+
+<div class="container">
+  
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+	<h5 class="my-0 mr-md-auto font-weight-normal">{{user.get_username}}</h5>
+  <!--href to be changed to homepage-->
+	<a class="btn btn-secondary" href="{% url 'UfaceInterface:select-module' %}">Back</a>
+  </div>
+</div>
+  
 	<div class="left">
 		<video id="video" width="640" height="480" preload autoplay loop muted></video>
 		<canvas id="canvas" width="640" height="480"></canvas>
@@ -116,6 +130,10 @@
 			</thead>
 		</table>
 		</div>
+	</div>
+
+	<div class="button">
+
 	</div>
 
 	
@@ -205,6 +223,10 @@
 	}	
 		
 	</script>
+	    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="selectFilter.min.js"></script>
 	</body>
 
 </html>

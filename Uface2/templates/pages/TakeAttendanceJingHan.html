@@ -8,7 +8,6 @@
 	{% load static %}
 	<script src="{% static 'tracking-min.js' %}"></script>
 	<script src="{% static 'face-min.js' %}"></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
 	<title>Take attendance</title>
@@ -17,39 +16,61 @@
   			box-sizing: border-box;
 		}
 		
+		html {
+  			font-family: "Lucida Sans", sans-serif;
+		}
+		.header {
+  			background-color: #495B67;
+			color: #ffffff;
+			text-align: center;
+			padding: 5px;
+			
+		}
 		div.left{
 			float: left;
 			width: 50%;
-			margin-left: 15%;
+			margin-left: auto;
 			margin-right: auto;
 			margin-top: 20px;
 			
 		}
 		div.right{
-			position: relative;
-			float: right;
+			float: left;
 			width: 50%;
 			margin-top: 10px;
 			margin-left: auto ;
-			margin-right: 70px;
+			margin-right: auto;
 			padding-left: 2%;
 			padding-right: 2%;
-			left: 5px;
 		}
-
 
 		video,canvas{position: absolute;}
 
-
+		.button {
+			background-color: #CDAA6E;
+  			border: none;
+  			color: white;
+  			padding: 15px 32px;
+  			text-align: center;
+  			text-decoration: none;
+  			display: block;
+  			font-size: 16px;
+			border-radius: 10px;
+			margin-top: 5px;
+			margin-bottom: 20px;
+		}
+		#takeAttendance{
+			background-color: #CDAA6E;
+		}
 		#endSession{
 			background-color: #796E45;
-		} 
+		}
 
 		table{
 			font-family: arial;
 			border-collapse: collapse;
 			table-layout:auto;
-			width: 60%;
+			width: 100%;
 		}
 		td, th {
   			border: 1px solid #dddddd;
@@ -71,48 +92,15 @@
 			font-size: medium;
 			;
 		}
-		#formButton {
-			margin-left:15px;
-		}
-		#endSession {
-			float:right;
-		}
-		#takeAttendance {
-			position: relative;
-			left: 51%;
-
-		}
     </style>
 
 </head>
 
 <body>
-	<div class="header">
-		<div class="container">
-			 
-		  
-			
-			<img class=" pull-left header-logo" src="{% static 'NTU Logo.png' %}" alt="NTU Logo">
-		 
-		 
-			<img class="pull-right header-logo" style="padding-left: 47.5rem" src="{% static 'UFace Logo.png' %}" alt="UFace Logo">
-		 
-		</div>
-		
+	<div class= "header">
+		<h2>Attendance Taking for CZ3002</h2>
 	</div>
-	
-	<div class="container">
-	  
 
-
-	  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-		  
-		<h5 class="my-0 mr-md-auto font-weight-normal">Attendance Taking</h5>
-	  <!--href to be changed to homepage-->
-		<a class="btn btn-secondary" href="{% url 'UfaceInterface:select-module' %}">Back</a>
-	  </div>
-	</div>
-	
 	<div class="left">
 		<video id="video" width="640" height="480" preload autoplay loop muted></video>
 		<canvas id="canvas" width="640" height="480"></canvas>
@@ -120,16 +108,17 @@
 	</div>	
 	<div class="right">
 		<!-- display success/failure message to student -->
+		<p id="message">Status: </p>
 		
-		
-		<div id="buttonStatus" >
-			<h5 id="message" class="w-50 float-left">Status: </h5>
-		<!--	<input type=button id="endSession" class="button" value="End Session">   -->
+		<div align="left" style="float: left">
+			<input type=button id="takeAttendance" class="button" value="Sign Attendance">
 		</div>
-		<input type="button" id="takeAttendance" class="btn btn-outline-success" value="Sign Attendance">
+		<div align="right">
+			<input type=button id="endSession" class="button" value="End Session">
+		</div>
 
 		<div class="list">
-		<table id="t01" class=" w-75">
+		<table id="t01">
 			<thead>
 			<tr>
 			  <th scope="col">Matric Number</th>
@@ -138,10 +127,8 @@
 			</tr>
 		  	</thead>
 		</table>
-
 		</div>
 	</div>
-	
 
 	
 	
