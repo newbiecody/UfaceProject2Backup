@@ -33,9 +33,9 @@ def SelectModule(request):
     print(courses)
     print(indexes)
 
-    zip_courses_indexes = zip(courses,indexes)
-    context = {'zip_courses_indexes':zip_courses_indexes}
-
+#    zip_courses_indexes = zip(courses,indexes)
+#    context = {'zip_courses_indexes':zip_courses_indexes}
+    context = {'courses':courses, 'indexes':indexes}
     return render(request, 'pages/SelectModule.html', context)
 
 def ViewNameList(request):
@@ -63,7 +63,7 @@ def ViewNameList(request):
                 email_list.append(x["email"])
                 counter+=1
 
-    zipped_list=zip(index_list,name_list,matric_list,email_list)
+    zipped_list = zip(index_list,name_list,matric_list,email_list)
 
     context_dict= {'zipped_list':zipped_list}
 
@@ -71,29 +71,44 @@ def ViewNameList(request):
 
     return render(request, 'pages/ViewNamelist.html', context_dict)
 
-def ViewReport(request):
-    return render(request, 'pages/ViewReport.html')
+#def ViewReport(request):
+#    return render(request, 'pages/ViewReport.html')
 
-#def RegisterFace(request):         latest previous original 17/3/2020
-#    if(uface.registerFace()):
-#        return render(request, 'pages/RegisterFace.html')
-#    else:
-#        return render(request, 'pages/error.html')
+
+def ViewReport(request):
+    std_obj = fb.get_module_dict("cz3002","sp1").get("students","")
+
+    std_count=0
+    abs_count=0
+    att_rate=0.0
+    
+    std_index=[]
+    std_name=[]
+    std_matric=[]
+    std_email=[]
+
+    for x in std_obj:
+        std_count+=1
+        present = fb.get_attendance_record("cz3002","sp1",x["matric_num"],"202003010830")
+        if present == False:
+            abs_count+=1
+            std_index.append(abs_count)
+            std_name.append(x["name"])
+            std_matric.append(x["matric_num"])
+            std_email.append(x["email"])
+            
+    att_rate=(std_count-abs_count)/std_count
+    zipped_std = zip(std_index, std_name, std_matric, std_email)
+
+    context= {'zipped_std':zipped_std, 'att_rate':att_rate, 'std_count':std_count, 'abs_count':abs_count}
+
+
+
+    return render(request, 'pages/ViewReport.html', context)
 
 def TakeAttendance(request):
-#    uface.registerFace()
     return render(request, 'pages/TakeAttendance.html')
 
-
-#testing opencv
-
-#def ViewNameList(request):
-#    if request.method =='POST':
-#        form = 
-#    return HttpResponseRedirect("pages/ViewNamelist.html")
-
-
-#JH webcam
 
 #face recognition with face_recognition API
 def checkFace(request):
@@ -204,4 +219,3 @@ def faceRegistration(request):
         #save the student's facial information in firebase
         fb.set_facial_info(course_code,course_index,matric,face_encodings[0]) 
         return JsonResponse({"success":2})
-

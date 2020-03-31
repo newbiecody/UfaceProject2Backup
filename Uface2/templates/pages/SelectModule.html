@@ -49,8 +49,8 @@
         <label>Course</label>
         <select class="form-control course selectFilter" data-target="index">
           <option value="-1">--Select Course--</option>
-          {% for retrieved in zip_courses_indexes %}
-              <option data-ref="{{retrieved.0}}">{{retrieved.0}}</option>
+          {% for retrieved in courses %}
+              <option data-ref="{{retrieved}}">{{retrieved}}</option>
           {% endfor %}
           
           
@@ -64,11 +64,11 @@
         <label>Index</label>
         <select class="form-control index selectFilter" data-target="session">
           <option value="-1">--Select Index--</option>
-          {% for gotten in zip_courses_indexes %}
-              <option data-ref="{{gotten.1}}">{{gotten.1}}</option>
+          {% for gotten in indexes %}
+              <option data-ref="{{gotten}}">{{gotten}}</option>
           {% endfor %}
 
-        <!--  <option data-ref="224" data-belong="3003">10224</option>
+        <!--  <option data-ref="224" data-belong="3003">10224</option>s
           <option data-ref="225" data-belong="3003">10225</option>  -->
       
           

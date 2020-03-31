@@ -2,7 +2,7 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="ViewReport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -24,7 +24,7 @@
           
           <div class="container">
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-              <h5 class="my-0 mr-md-auto font-weight-normal">Attendance Report</h5>
+              <h5 class="my-0 mr-md-auto font-weight-normal">{{user.get_username}}</h5>
             <!--href to be changed to homepage-->
               <a class="btn btn-secondary" href="{% url 'logout' %}">Log Out</a>
             </div>
@@ -35,49 +35,48 @@
              
               <tr>
                 <th scope="row">Academic Year</th>
-                <td>AY 19/20</td>
+                <td>--academic year--</td>
 
                 <th scope="row">Semester</th>
-                <td>2</td>
+                <td>--semester--</td>
               </tr>
 
               <tr>
                 <th scope="row">Course</th>
-                <td>CZ3002 Advanced Software Engineering</td>
+                <td>--course id and name--</td>
                 <th scope="row">Professor</th>
-                <td>SCSE Althea Liang</td>
+                <td>--professor name</td>
               </tr>
 
               <tr>
                 <th scope="row">Index</th>
-                <td>sp1</td>
+                <td>--index no--</td>
                 <th scope="row">Session</th>
-                <td>Lab 3</td>
+                <td>--session--</td>
               </tr>
 
               <tr>
                 <th scope="row">Date</th>
-                <td>2020-03-01</td>
+                <td>--date--</td>
                 <th scope="row">Venue</th>
-                <td>Software Lab 3</td>
+                <td>--venue--</td>
               </tr>
 
               <tr>
-                <th scope="row">No. of Students</th>
-                <td>{{ std_count }}</td>
+                <th scope="row">No. of Studnets</th>
+                <td>--total no. of studnets--</td>
                 <th scope="row">No. of Absentees</th>
-                <td>{{ abs_count }}</td>
+                <td>--no. of absentees--</td>
+                
               </tr>
               
               <tr>
                 <th scope="row">Attendance Rate</th>
-                <td>{{ att_rate }}</td>
+                <td>--attendance rate--</td>
                 
               </tr>
 
             </table>
-
-          
             
             <h5>List of Absentees</h5>
 
@@ -94,18 +93,32 @@
                   <th scope="col">Email</th>
                 </tr>
               </thead>
-
               <tbody>
-                {% for row in zipped_std %}
                 <tr>
-                  {% for column in row %}
-                    <td>{{column}}</td>
-                  {% endfor %}
+                  <th scope="row">1</th>
+                  <td>Student1</td>
+                  <td>UXXX1</td>
+                  
+                  <td>UXXX1@e.ntu.edu.sg</td>
+        
                 </tr>
-                {% endfor %}
-
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Student2</td>
+                  <td>UXXX2</td>
+                  
+                  <td>UXXX2@e.ntu.edu.sg</td>
+              
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Student3</td>
+                  <td>UXXX3</td>
+                  
+                  <td>UXXX3@e.ntu.edu.sg</td>
+            
+                </tr>
               </tbody>
-
             </table>
           </div>
 
@@ -130,8 +143,6 @@
       function myFunction() {
     window.print();
 }
-
-
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
