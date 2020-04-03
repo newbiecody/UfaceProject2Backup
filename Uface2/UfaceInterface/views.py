@@ -39,7 +39,7 @@ def SelectModule(request):
     return render(request, 'pages/SelectModule.html', context)
 
 def ViewNameList(request):
-    data = fb.get_course_dict("cz3002").get("modules","")
+    data = fb.get_course_dict("course_code_test").get("modules","")
     index_module_data = []
 
 #    for item in data:
@@ -107,6 +107,18 @@ def ViewReport(request):
     return render(request, 'pages/ViewReport.html', context)
 
 def TakeAttendance(request):
+    #reset all attendance records for this session (for demo purpose)
+    course_code = "course_code_test"
+    course_index = "course_index_test"
+    checkInTime = "202003010830"
+    all_students_obj = fb.get_all_student_obj(course_code,course_index)
+    for student in all_students_obj:
+        matric = student.dict()['matric_num']
+        #check if already signed in
+        signed = fb.get_attendance_record(course_code,course_index,matric,checkInTime)
+        #reset the attendance record if signed in
+        if signed:
+            fb.set_attendance_record(course_code,course_index,matric,checkInTime,False)
     return render(request, 'pages/TakeAttendance.html')
 
 
@@ -133,7 +145,7 @@ def checkFace(request):
         #resize the frame for faster face detection
 
         #load known faces from database
-        known_student_objects = fb.get_all_student_obj(course_code,course_index)
+        known_student_objects = fb.get_all_registered_student_obj(course_code,course_index)
         known_face_encodings = fb.get_all_facial_info(course_code,course_index)
 
         #detect faces in the request image
